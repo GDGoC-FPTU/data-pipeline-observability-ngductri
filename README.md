@@ -8,7 +8,7 @@
 
 ## Mo ta
 
-(Mo ta ngan gon bai lab va nhung gi ban da lam)
+Pipeline thuc hien ETL tu file JSON, loai bo ban ghi khong hop le (gia <= 0, category rong), chuan hoa category dang Title Case, tinh discounted_price va them processed_at. Ket qua duoc luu ra CSV va dung de danh gia anh huong chat luong du lieu den agent.
 
 ---
 
@@ -27,6 +27,9 @@ python solution.py
 ### Chay Agent Simulation (Stress Test)
 ```bash
 # Mo ta cach ban chay thi nghiem Clean vs Garbage data
+python solution.py
+python generate_garbage.py
+python agent_simulation.py
 ```
 
 ---
@@ -44,4 +47,4 @@ python solution.py
 
 ## Ket qua
 
-(Tom tat ket qua: bao nhieu records da xu ly, bao nhieu bi loai, v.v.)
+Tu raw_data.json co 5 records, sau validate con 3 records hop le va 2 records bi loai (gia <= 0 hoac category rong). File processed_data.csv duoc tao voi cac cot: price, discounted_price, category (Title Case) va processed_at.
