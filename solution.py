@@ -26,7 +26,7 @@ import os
 import datetime
 
 # --- CONFIGURATION ---
-SOURCE_FILE = 'data-pipeline-observability-ngductri/raw_data.json'
+SOURCE_FILE = 'raw_data.json'
 OUTPUT_FILE = 'processed_data.csv'
 
 
