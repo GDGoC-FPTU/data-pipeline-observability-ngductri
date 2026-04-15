@@ -8,7 +8,7 @@
 
 ## Mo ta
 
-(Mo ta ngan gon bai lab va nhung gi ban da lam)
+Bài lab này yêu cầu xây dựng một pipeline ETL tự động để xử lý dữ liệu sản phẩm từ file JSON, kiểm tra và loại bỏ dữ liệu không hợp lệ, chuẩn hóa thông tin, tính giá sau giảm giá và lưu kết quả ra file CSV. Ngoài ra, em đã thực hiện so sánh kết quả của agent khi sử dụng dữ liệu sạch và dữ liệu lỗi, phân tích ảnh hưởng của chất lượng dữ liệu đến kết quả AI, và hoàn thành báo cáo theo yêu cầu.
 
 ---
 
@@ -27,6 +27,12 @@ python solution.py
 ### Chay Agent Simulation (Stress Test)
 ```bash
 # Mo ta cach ban chay thi nghiem Clean vs Garbage data
+    Testing with CLEAN data:
+    Agent: Based on my data, the best choice is Laptop at $1200.
+
+    Testing with GARBAGE data:
+    Agent: Based on my data, the best choice is Nuclear Reactor at $999999.
+
 ```
 
 ---
@@ -44,4 +50,9 @@ python solution.py
 
 ## Ket qua
 
-(Tom tat ket qua: bao nhieu records da xu ly, bao nhieu bi loai, v.v.)
+Tóm tắt kết quả:
+- Tổng số records đầu vào: 5
+- Số records hợp lệ sau khi validate: 3
+- Số records bị loại bỏ: 2 (do giá <= 0 hoặc thiếu category)
+- File processed_data.csv đã được tạo thành công với 3 records sạch, đầy đủ thông tin.
+Kết quả chi tiết được ghi nhận trong quá trình chạy pipeline và có thể kiểm tra lại trong file processed_data.csv.
