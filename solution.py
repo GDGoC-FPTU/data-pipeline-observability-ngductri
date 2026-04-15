@@ -26,7 +26,7 @@ import os
 import datetime
 
 # --- CONFIGURATION ---
-SOURCE_FILE = 'data-pipeline-observability-ngductri/raw_data.json'
+SOURCE_FILE = 'raw_data.json'
 OUTPUT_FILE = 'processed_data.csv'
 
 
@@ -94,7 +94,7 @@ def validate(data):
 
     # Giu lai record hop le, dem record loi
 
-    print(f"Validation complete. Valid: {len(valid_records)}, Errors: {error_count}")
+    print(f"Validation summary: {len(valid_records)} valid, {error_count} errors dropped.")
     return valid_records
 
 
@@ -134,7 +134,7 @@ def load(df, output_path):
        - df.to_csv(output_path, index=False)
     """
     # TODO: Luu DataFrame ra CSV
-    return df.to_csv(output_path, index=False)
+    df.to_csv(output_path, index=False)
     print(f"Data saved to {output_path}")
 
 
