@@ -48,6 +48,7 @@ def extract(file_path):
     # Vi du:
     #   with open(file_path, 'r') as f:
     #       data = json.load(f)
+    #hgaa
     #   return data
     print('opening file...')
     try:
