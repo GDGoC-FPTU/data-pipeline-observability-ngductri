@@ -26,8 +26,10 @@ import os
 import datetime
 
 # --- CONFIGURATION ---
-SOURCE_FILE = 'raw_data.json'
+SOURCE_FILE = 'data-pipeline-observability-ngductri/raw_data.json'
 OUTPUT_FILE = 'processed_data.csv'
+
+
 
 
 def extract(file_path):
@@ -47,7 +49,16 @@ def extract(file_path):
     #   with open(file_path, 'r') as f:
     #       data = json.load(f)
     #   return data
-    pass
+    print('opening file...')
+    try:
+        with open(file_path, 'r') as f:
+            data = json.load(f)
+        return data
+    except FileNotFoundError:
+        print(f"Error: File {file_path} not found.")
+
+
+# print(extract(SOURCE_FILE))
 
 
 def validate(data):
@@ -66,10 +77,20 @@ def validate(data):
     Returns:
         list: Danh sach cac records hop le
     """
+
     valid_records = []
     error_count = 0
-
+    print('start validation...')
     # TODO: Lap qua data, kiem tra tung record
+    for item in data:
+        price = item.get('price', 0)
+        category = item.get('category')
+        if price <= 0 or not category:
+            error_count += 1
+        else:
+            valid_records.append(item)
+        
+
     # Giu lai record hop le, dem record loi
 
     print(f"Validation complete. Valid: {len(valid_records)}, Errors: {error_count}")
@@ -94,8 +115,14 @@ def transform(data):
     Returns:
         pd.DataFrame: DataFrame da duoc transform
     """
+    print("Transforming data...")
     # TODO: Tao DataFrame va ap dung transformations
-    pass
+    df = pd.DataFrame(data)
+    df['discounted_price'] = df['price'] * 0.9
+    df['category'] = df['category'].str.title()
+    df['processed_at'] = datetime.datetime.now().isoformat()
+    print("Transformation complete.")
+    return df
 
 
 def load(df, output_path):
@@ -106,6 +133,7 @@ def load(df, output_path):
        - df.to_csv(output_path, index=False)
     """
     # TODO: Luu DataFrame ra CSV
+    return df.to_csv(output_path, index=False)
     print(f"Data saved to {output_path}")
 
 
